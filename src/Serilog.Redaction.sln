@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Redaction", "Serilog.Redaction\Serilog.Redaction.csproj", "{F1CA126D-5516-4695-8706-8A0109A125B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Redaction.Tests", "Serilog.Redaction.Tests\Serilog.Redaction.Tests.csproj", "{6127775D-8B82-488A-BD9D-26B17FA21C7B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{12724B6D-82DD-4BE8-A2E5-C874F4C5B272}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+		..\Directory.Packages.props = ..\Directory.Packages.props
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1CA126D-5516-4695-8706-8A0109A125B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1CA126D-5516-4695-8706-8A0109A125B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1CA126D-5516-4695-8706-8A0109A125B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1CA126D-5516-4695-8706-8A0109A125B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6127775D-8B82-488A-BD9D-26B17FA21C7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6127775D-8B82-488A-BD9D-26B17FA21C7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6127775D-8B82-488A-BD9D-26B17FA21C7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6127775D-8B82-488A-BD9D-26B17FA21C7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

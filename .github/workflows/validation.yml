@@ -1,8 +1,8 @@
 name: Validation
 on:
   pull_request:
-    branches: [develop]
-    
+    branches: [ develop ]
+
 jobs:
   validation:
     runs-on: ubuntu-latest

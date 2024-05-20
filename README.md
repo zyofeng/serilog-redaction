@@ -35,9 +35,15 @@ Add Redaction services:
 ```
 var builder = WebApplication.CreateBuilder(args);
 ...
-builder.Services.AddRedaction(
-    ...
-);
+builder.Services.AddRedaction(x =>
+{
+    x.SetRedactor<ErasingRedactor>(new DataClassificationSet(Taxonomy.Personal));
+    x.SetHmacRedactor(hmacOpts =>
+    {
+        hmacOpts.Key = Convert.ToBase64String("Some super secret key that's really long for security"u8.ToArray());
+        hmacOpts.KeyId = 123;
+    }, new DataClassificationSet(Taxonomy.Sensitive));
+});
 ...
 ```
 Configure LoggerConfiguration:

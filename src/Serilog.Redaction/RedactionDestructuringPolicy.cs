@@ -50,11 +50,14 @@ public class RedactionDestructuringPolicy(IRedactorProvider redactorProvider) : 
                 {
                     var redactor = redactorProvider.GetRedactor(dataClassification!);
 
-                    if (redactor.Redact(value) is {} redacted&& !string.IsNullOrEmpty(redacted))
+                    if (redactor.Redact(value) is { } redacted && !string.IsNullOrEmpty(redacted))
                         logEventProperties.Add(new LogEventProperty(propertyInfo.Name, new ScalarValue(redacted)));
                 }
                 else
-                    logEventProperties.Add(new LogEventProperty(propertyInfo.Name, factory.CreatePropertyValue(value, true)));
+                {
+                    logEventProperties.Add(new LogEventProperty(propertyInfo.Name,
+                        factory.CreatePropertyValue(value, true)));
+                }
             }
 
             return new StructureValue(logEventProperties, type.Name);

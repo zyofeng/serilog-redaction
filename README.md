@@ -15,11 +15,13 @@ public static class Taxonomy
 {
     public static string TaxonomyName => typeof(Taxonomy).FullName!;
     
-        public static DataClassification Sensitive => new(TaxonomyName, nameof(Sensitive));
-        public static DataClassification Personal => new(TaxonomyName, nameof(Personal));
-    }
-    public class HashedDataAttribute() : DataClassificationAttribute(Taxonomy.Personal);
-    public class ErasedDataAttribute() : DataClassificationAttribute(Taxonomy.Sensitive);
+    public static DataClassification Confidential => new(TaxonomyName, nameof(Confidential));
+    public static DataClassification Restricted => new(TaxonomyName, nameof(Restricted));
+    public static DataClassification Internal => new(TaxonomyName, nameof(Internal));
+    public static DataClassification Public => new(TaxonomyName, nameof(Public));
+    
+    public class ConfidentialDataAttribute() : DataClassificationAttribute(Taxonomy.Confidential);
+    public class RestrictedDataAttribute() : DataClassificationAttribute(Taxonomy.Restricted);
 }
 ```
 Decorate classes/properties with DataClassificationAttributes:
@@ -37,12 +39,12 @@ var builder = WebApplication.CreateBuilder(args);
 ...
 builder.Services.AddRedaction(x =>
 {
-    x.SetRedactor<ErasingRedactor>(new DataClassificationSet(Taxonomy.Personal));
+    x.SetRedactor<ErasingRedactor>(DataClassificationSet.FromDataClassification(Taxonomy.Confidential));
     x.SetHmacRedactor(hmacOpts =>
     {
         hmacOpts.Key = Convert.ToBase64String("Some super secret key that's really long for security"u8.ToArray());
         hmacOpts.KeyId = 123;
-    }, new DataClassificationSet(Taxonomy.Sensitive));
+    }, DataClassificationSet.FromDataClassification(Taxonomy.Restricted));
 });
 ...
 ```

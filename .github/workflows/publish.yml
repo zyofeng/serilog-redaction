@@ -1,4 +1,9 @@
 name: Serilog.Redaction
+on:
+  pull_request:
+    branches:
+      - main
+    
 jobs:
   pack:
     runs-on: ubuntu-latest
@@ -11,8 +16,11 @@ jobs:
           dotnet-version: 8.0.x
       - name: Restore packages
         run: dotnet restore
+      - name: Build
+        run: dotnet build -c Release --no-restore
+        working-directory: src
       - name: Pack
-        run: dotnet pack -c Release --no-restore -o published  
+        run: dotnet pack -c Release --no-build -o published  
         working-directory: src
       - name: Upload artifacts
         uses: actions/upload-artifact@v4

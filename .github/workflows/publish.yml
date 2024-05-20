@@ -19,6 +19,7 @@ jobs:
           dotnet-version: 8.0.x
       - name: Restore packages
         run: dotnet restore
+        working-directory: src
       - name: Build
         run: dotnet build -c Release --no-restore
         working-directory: src

@@ -26,11 +26,10 @@ public static class Taxonomy
 ```
 Decorate classes/properties with DataClassificationAttributes:
 ```
-public record TestPayload
+public record Client
 {
-
-    [HashedData] public string? LastName { get; init; }
-    [ErasedData] public string? TaxNumber { get; init; }
+    [RestrictedData] public string? LastName { get; init; }
+    [ConfidentialData] public string? TaxNumber { get; init; }
 }
 ```
 Add Redaction services:
@@ -42,7 +41,7 @@ builder.Services.AddRedaction(x =>
     x.SetRedactor<ErasingRedactor>(DataClassificationSet.FromDataClassification(Taxonomy.Confidential));
     x.SetHmacRedactor(hmacOpts =>
     {
-        hmacOpts.Key = Convert.ToBase64String("Some super secret key that's really long for security"u8.ToArray());
+        hmacOpts.Key = Convert.ToBase64String("Some super secret key that is really long for security"u8.ToArray());
         hmacOpts.KeyId = 123;
     }, DataClassificationSet.FromDataClassification(Taxonomy.Restricted));
 });

@@ -1,4 +1,4 @@
-name: Serilog.Redaction
+name: Validation
 on:
   pull_request:
     branches: [develop]

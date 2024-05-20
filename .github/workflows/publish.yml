@@ -1,0 +1,22 @@
+name: Serilog.Redaction
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Install SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore packages
+        run: dotnet restore
+      - name: Pack
+        run: dotnet pack -c Release --no-restore -o published  
+        working-directory: src
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Nuget packages
+          path: |
+            src/published/*

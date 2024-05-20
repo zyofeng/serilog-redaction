@@ -1,0 +1,25 @@
+name: Serilog.Redaction
+on:
+  pull_request:
+    branches:
+      - develop
+    
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Install SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore packages
+        run: dotnet restore
+        working-directory: src
+      - name: Build
+        run: dotnet build -c Release --no-restore
+        working-directory: src
+      - name: Test
+        run: dotnet test -c Release --logger:"console;verbosity=normal" --no-build
+        working-directory: src

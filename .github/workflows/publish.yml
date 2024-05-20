@@ -1,11 +1,11 @@
 name: Publish
 on:
   pull_request:
-    branches: [main]
+    branches: [ main ]
   release:
-    types: [published]
+    types: [ published ]
   workflow_dispatch:
-    
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -16,6 +16,9 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
+          source-url: https://nuget.pkg.github.com/zyofeng/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Restore packages
         run: dotnet restore
         working-directory: src
@@ -23,7 +26,10 @@ jobs:
         run: dotnet build -c Release --no-restore
         working-directory: src
       - name: Pack
-        run: dotnet pack -c Release --no-build -o published  
+        run: dotnet pack -c Release --no-build -o published
+        working-directory: src
+      - name: Push generated package to GitHub registry
+        run: dotnet nuget push ./published/*.nupkg --skip-duplicate --no-symbols true
         working-directory: src
       - name: Upload artifacts
         uses: actions/upload-artifact@v4

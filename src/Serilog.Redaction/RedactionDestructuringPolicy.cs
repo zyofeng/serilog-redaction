@@ -14,11 +14,10 @@ public class RedactionDestructuringPolicy(IRedactorProvider redactorProvider) : 
         ConcurrentDictionary<Type, Func<object, ILogEventPropertyValueFactory, LogEventPropertyValue>?>
         DestructureFuncs = new();
 
-    public bool TryDestructure(object value, ILogEventPropertyValueFactory propertyValueFactory,
-        [NotNullWhen(true)] out LogEventPropertyValue? result)
+    public bool TryDestructure(object value, ILogEventPropertyValueFactory propertyValueFactory, out LogEventPropertyValue result)
     {
         var func = DestructureFuncs.GetOrAdd(value.GetType(), CreateDestructureFunc);
-        result = func?.Invoke(value, propertyValueFactory);
+        result = func?.Invoke(value, propertyValueFactory) ?? default!;
         return func is not null;
     }
 

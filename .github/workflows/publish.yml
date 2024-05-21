@@ -7,6 +7,7 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment: production
     permissions:
       packages: write
     steps:
@@ -31,8 +32,8 @@ jobs:
       - name: Push generated package to GitHub registry
         run: dotnet nuget push ./published/*.nupkg --skip-duplicate
         working-directory: src
-      - name: Push generated package to GitHub registry
-        run: dotnet nuget push ./published/*.nupkg --api-key "${{ secrets.NUGET_APIKEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
+      - name: Push generated package to Nuget registry
+        run: dotnet nuget push ./published/*.nupkg -k "${{ secrets.NUGET_APIKEY }}" -s https://api.nuget.org/v3/index.json --skip-duplicate
         working-directory: src
       - name: Upload artifacts
         uses: actions/upload-artifact@v4

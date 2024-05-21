@@ -1,7 +1,5 @@
 name: Publish
 on:
-  pull_request:
-    branches: [ main ]
   release:
     types: [ published ]
   workflow_dispatch:
@@ -31,7 +29,10 @@ jobs:
         run: dotnet pack -c Release --no-build -o published
         working-directory: src
       - name: Push generated package to GitHub registry
-        run: dotnet nuget push ./published/*.nupkg -k ${{secrets.GITHUB_TOKEN}}
+        run: dotnet nuget push ./published/*.nupkg
+        working-directory: src
+      - name: Push generated package to GitHub registry
+        run: dotnet nuget push ./published/*.nupkg --api-key "${{ secrets.NUGET_APIKEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
         working-directory: src
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -39,3 +40,4 @@ jobs:
           name: Nuget packages
           path: |
             src/published/*
+            

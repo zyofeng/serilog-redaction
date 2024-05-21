@@ -29,7 +29,7 @@ jobs:
         run: dotnet pack -c Release --no-build -o published
         working-directory: src
       - name: Push generated package to GitHub registry
-        run: dotnet nuget push ./published/*.nupkg
+        run: dotnet nuget push ./published/*.nupkg --skip-duplicate
         working-directory: src
       - name: Push generated package to GitHub registry
         run: dotnet nuget push ./published/*.nupkg --api-key "${{ secrets.NUGET_APIKEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate

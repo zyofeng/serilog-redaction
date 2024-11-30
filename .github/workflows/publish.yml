@@ -16,6 +16,7 @@ jobs:
       - name: Install SDK
         uses: actions/setup-dotnet@v4
         with:
+          dotnet-version: 9.x
           source-url: https://nuget.pkg.github.com/zyofeng/index.json
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

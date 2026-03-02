@@ -1,7 +1,7 @@
 name: Validation
 on:
   pull_request:
-    branches: [ develop ]
+    branches: [ main ]
     
 jobs:
   validation:
@@ -15,10 +15,7 @@ jobs:
           dotnet-version: 10.x
       - name: Restore packages
         run: dotnet restore
-        working-directory: src
       - name: Build
         run: dotnet build -c Release --no-restore
-        working-directory: src
       - name: Test
         run: dotnet test -c Release --logger:"console;verbosity=normal" --no-build
-        working-directory: src

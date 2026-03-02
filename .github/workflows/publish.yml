@@ -22,19 +22,14 @@ jobs:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Restore packages
         run: dotnet restore
-        working-directory: src
       - name: Build
         run: dotnet build -c Release --no-restore
-        working-directory: src
       - name: Pack
         run: dotnet pack -c Release --no-build -o published
-        working-directory: src
       - name: Push generated package to GitHub registry
         run: dotnet nuget push ./published/*.nupkg --skip-duplicate
-        working-directory: src
       - name: Push generated package to Nuget registry
         run: dotnet nuget push ./published/*.nupkg -k "${{ secrets.NUGET_APIKEY }}" -s https://api.nuget.org/v3/index.json --skip-duplicate
-        working-directory: src
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:

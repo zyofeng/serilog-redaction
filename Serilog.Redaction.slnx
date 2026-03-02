@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Packages.props" />
+    <File Path="LICENSE.txt" />
+    <File Path="NuGet.Config" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="src/Serilog.Redaction.Tests/Serilog.Redaction.Tests.csproj" />
+  <Project Path="src/Serilog.Redaction/Serilog.Redaction.csproj" />
+</Solution>

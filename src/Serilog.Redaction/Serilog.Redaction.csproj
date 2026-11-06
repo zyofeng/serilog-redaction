@@ -3,8 +3,6 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net8.0;net9.0;net10.0</TargetFrameworks>
         <LangVersion>preview</LangVersion>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
         <Description>Serilog Redaction library for Microsoft.Extensions.Compliance.Redaction</Description>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Authors>Mike Mao</Authors>
@@ -19,15 +17,10 @@
         <DebugSymbols>true</DebugSymbols>
         <DebugType>embedded</DebugType>
         <PackageTags>serilog;redaction</PackageTags>
-        <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.Compliance.Abstractions"/>
-        <PackageReference Include="Microsoft.SourceLink.GitHub">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
         <PackageReference Include="MinVer">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

@@ -15,10 +15,13 @@ jobs:
       - name: Install SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 10.x
+          dotnet-version: |
+            8.x
+            9.x
+          global-json-file: global.json
       - name: Restore packages
         run: dotnet restore
       - name: Build
         run: dotnet build -c Release --no-restore
       - name: Test
-        run: dotnet test -c Release --logger:"console;verbosity=normal" --no-build
+        run: dotnet test -c Release --no-build

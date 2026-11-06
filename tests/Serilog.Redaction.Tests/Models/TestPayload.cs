@@ -1,8 +1,10 @@
-namespace Serilog.Redaction.Tests;
+using Serilog.Redaction.Tests.Infrastructure;
 
-public record TestPayload
+namespace Serilog.Redaction.Tests.Models;
+
+public sealed record TestPayload
 {
-    public string Payload { get; init; } = default!;
+    public string? Payload { get; init; }
 
     [HashedData] public string? LastName { get; init; }
     [ErasedData] public string? TaxNumber { get; init; }
@@ -10,7 +12,7 @@ public record TestPayload
     [HashedData] public Nested? Child { get; init; }
     public TestPayload? Recursive { get; init; }
 
-    public record Nested
+    public sealed record Nested
     {
         public string? Message { get; init; }
 

@@ -13,10 +13,12 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Install SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 10.x
+          global-json-file: global.json
           source-url: https://nuget.pkg.github.com/zyofeng/index.json
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -35,5 +37,5 @@ jobs:
         with:
           name: Nuget packages
           path: |
-            src/published/*
+            published/*
             

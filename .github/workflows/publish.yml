@@ -10,6 +10,7 @@ jobs:
     environment: production
     permissions:
       packages: write
+      id-token: write
     steps:
       - name: Check out code
         uses: actions/checkout@v7
@@ -19,23 +20,21 @@ jobs:
         uses: actions/setup-dotnet@v6
         with:
           global-json-file: global.json
-          source-url: https://nuget.pkg.github.com/zyofeng/index.json
-        env:
-          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - name: Restore packages
-        run: dotnet restore
       - name: Build
-        run: dotnet build -c Release --no-restore
+        run: dotnet build -c Release
       - name: Pack
         run: dotnet pack -c Release --no-build -o published
-      - name: Push generated package to GitHub registry
-        run: dotnet nuget push ./published/*.nupkg --skip-duplicate
-      - name: Push generated package to Nuget registry
-        run: dotnet nuget push ./published/*.nupkg -k "${{ secrets.NUGET_APIKEY }}" -s https://api.nuget.org/v3/index.json --skip-duplicate
+      - name: Push to GitHub registry
+        run: dotnet nuget push ./published/*.nupkg -k "${{ secrets.GITHUB_TOKEN }}" -s https://nuget.pkg.github.com/zyofeng/index.json --skip-duplicate
+      - name: NuGet login (OIDC)
+        uses: NuGet/login@v1
+        id: nuget-login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+      - name: Push to NuGet registry
+        run: dotnet nuget push ./published/*.nupkg -k "${{ steps.nuget-login.outputs.NUGET_API_KEY }}" -s https://api.nuget.org/v3/index.json --skip-duplicate
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
         with:
           name: Nuget packages
-          path: |
-            published/*
-            
+          path: published/*

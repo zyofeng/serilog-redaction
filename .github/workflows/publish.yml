@@ -33,7 +33,7 @@ jobs:
       - name: Push generated package to Nuget registry
         run: dotnet nuget push ./published/*.nupkg -k "${{ secrets.NUGET_APIKEY }}" -s https://api.nuget.org/v3/index.json --skip-duplicate
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Nuget packages
           path: |

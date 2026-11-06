@@ -1,10 +1,17 @@
 <Solution>
   <Folder Name="/Solution Items/">
+    <File Path=".github/dependabot.yml" />
+    <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
     <File Path="LICENSE.txt" />
     <File Path="NuGet.Config" />
     <File Path="README.md" />
   </Folder>
-  <Project Path="src/Serilog.Redaction.Tests/Serilog.Redaction.Tests.csproj" />
-  <Project Path="src/Serilog.Redaction/Serilog.Redaction.csproj" />
+  <Folder Name="/src/">
+    <Project Path="src/Serilog.Redaction/Serilog.Redaction.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Serilog.Redaction.Tests/Serilog.Redaction.Tests.csproj" />
+  </Folder>
 </Solution>

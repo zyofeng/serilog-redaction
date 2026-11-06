@@ -2,14 +2,15 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageVersion Include="FluentAssertions" Version="8.8.0" />
-    <PackageVersion Include="Microsoft.Extensions.Compliance.Redaction" Version="10.3.0" />
-    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.103" />
-    <PackageVersion Include="MinVer" Version="7.0.0" />
-    <PackageVersion Include="Serilog" Version="4.3.1" />
-    <PackageVersion Include="Microsoft.Extensions.Compliance.Abstractions" Version="10.3.0" />
-    <PackageVersion Include="coverlet.collector" Version="8.0.0" />
-    <PackageVersion Include="xunit.v3" Version="3.2.2" />
+  <ItemGroup Label="Library">
+    <PackageVersion Include="Microsoft.Extensions.Compliance.Abstractions" Version="10.11.0" />
+    <PackageVersion Include="Serilog" Version="4.4.0" />
+  </ItemGroup>
+  <ItemGroup Label="Build">
+    <PackageVersion Include="MinVer" Version="8.0.0" />
+  </ItemGroup>
+  <ItemGroup Label="Tests">
+    <PackageVersion Include="Microsoft.Extensions.Compliance.Redaction" Version="10.11.0" />
+    <PackageVersion Include="TUnit" Version="1.81.0" />
   </ItemGroup>
 </Project>

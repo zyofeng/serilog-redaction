@@ -9,8 +9,8 @@ public static class LoggerConfigurationRedactionExtensions
     /// Adds a <see cref="RedactionDestructuringPolicy"/>
     /// </summary>
     /// <param name="configuration">The logger configuration to apply configuration to.</param>
-    /// <param name="redactorProvider"></param>
+    /// <param name="redactorProvider">The redactor provider to use for redaction.</param>
     public static LoggerConfiguration WithRedaction(this LoggerDestructuringConfiguration configuration,
         IRedactorProvider? redactorProvider = null)
-        => configuration.With(new RedactionDestructuringPolicy(redactorProvider ?? new NullRedactorProvider()));
+        => configuration.With(new RedactionDestructuringPolicy(redactorProvider ?? NullRedactorProvider.Instance));
 }

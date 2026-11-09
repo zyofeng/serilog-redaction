@@ -51,8 +51,7 @@ public class RedactionDestructuringPolicy(IRedactorProvider redactorProvider) : 
 
     private static TypeMetadata? CreateTypeMetadata(Type type)
     {
-        var properties = type
-            .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+        var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
         var classifications = new Dictionary<PropertyInfo, DataClassification>();
         foreach (var property in properties)
